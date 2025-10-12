@@ -4,7 +4,7 @@ Localization toolkit for AnyBar and its plugins, which helps AnyBar plugin devel
 
 ## Getting Started
 
-Install and reference [AnyBar.Localization](www.nuget.org/packages/AnyBar.Localization) via NuGet.
+Install and reference [AnyBar.Localization](https://www.nuget.org/packages/AnyBar.Localization) via NuGet.
 
 ## Build Properties
 
