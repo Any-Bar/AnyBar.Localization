@@ -5,7 +5,7 @@
     <EnforceExtendedAnalyzerRules>true</EnforceExtendedAnalyzerRules>
     <RootNamespace>AnyBar.Localization.SourceGenerators</RootNamespace>
     <!-- Add AssemblyVersion because we need to use assembly version as package version -->
-    <AssemblyVersion>0.0.1</AssemblyVersion>
+    <AssemblyVersion>0.0.2</AssemblyVersion>
   </PropertyGroup>
 
   <ItemGroup>
