@@ -21,7 +21,7 @@
     <Description>Localization toolkit for AnyBar and its plugins</Description>
     <Authors>AnyBar Team</Authors>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
-    <RepositoryUrl>https://github.com/Any-Bar/AnyBar</RepositoryUrl>
+    <RepositoryUrl>https://github.com/Any-Bar/AnyBar.Localization</RepositoryUrl>
     <PackageDescription>Localization toolkit for AnyBar and its plugins</PackageDescription>
     <PackageTags>localization-tool; localization-toolkit; localization-tools; any-bar; anybar-plugins; anybar; anybar-plugin</PackageTags>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
