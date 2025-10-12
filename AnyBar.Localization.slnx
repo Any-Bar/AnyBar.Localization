@@ -1,0 +1,12 @@
+<Solution>
+  <Folder Name="/Solution Items/">
+    <File Path="global.json" />
+    <File Path="LICENSE" />
+    <File Path="README.md" />
+  </Folder>
+  <Project Path="AnyBar.Localization.Analyzers/AnyBar.Localization.Analyzers.csproj" />
+  <Project Path="AnyBar.Localization.Attributes/AnyBar.Localization.Attributes.csproj" />
+  <Project Path="AnyBar.Localization.Shared/AnyBar.Localization.Shared.csproj" />
+  <Project Path="AnyBar.Localization.SourceGenerators/AnyBar.Localization.SourceGenerators.csproj" />
+  <Project Path="AnyBar.Localization/AnyBar.Localization.csproj" />
+</Solution>

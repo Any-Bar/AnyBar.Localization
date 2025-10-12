@@ -1,0 +1,137 @@
+# AnyBar Localization Toolkit
+
+Localization toolkit for AnyBar and its plugins, which helps AnyBar plugin developers make the localization process easier.
+
+## Getting Started
+
+Install and reference [AnyBar.Localization](www.nuget.org/packages/AnyBar.Localization) via NuGet.
+
+## Build Properties
+
+These are properties you can configure in your `.csproj` file to customize the localization process. You can set them in the `<PropertyGroup>` section. For example, to set the `AnyBarUseDependencyInjection` property to `true`, add the following lines:
+
+```xml
+<PropertyGroup>
+    <AnyBarUseDependencyInjection>true</AnyBarUseDependencyInjection>
+</PropertyGroup>
+```
+
+### `AnyBarUseDependencyInjection`
+
+This flag specifies whether to use dependency injection to obtain an `IPublicAPI` instance. The default is `false`.
+- If set to `false`, the main class (which must implement `IPlugin` or `IAsyncPlugin`)
+  must have a `PluginInitContext` property that is at least `internal static`.
+- If set to `true`, you can access the `IPublicAPI` instance via `PublicApi.Instance` using dependency injection, and the main class does not need to include a `PluginInitContext` property.
+
+## Usage
+
+### Main Class
+
+The main class must implement `IPluginI18n`.
+
+If `AnyBarUseDependencyInjection` is `false`, include a `PluginInitContext` property, for example:
+
+```csharp
+// Must implement IPluginI18n
+public class Main : IPlugin, IPluginI18n
+{
+    // Must be at least internal static
+    internal static PluginInitContext Context { get; private set; } = null!;
+}
+```
+
+### Localized Strings
+
+You can simplify your code by replacing calls like:
+```csharp
+Context.API.GetTranslation("AnyBar_Plugin_Localization_Demo_Plugin_Name")
+```
+with:
+```csharp
+Localize.AnyBar_Plugin_Localization_Demo_Plugin_Name()
+```
+
+If your localization string uses variables, it becomes even simpler! From this:
+```csharp
+string.Format(Context.API.GetTranslation("AnyBar_Plugin_Localization_Demo_Value_With_Keys"), firstName, lastName);
+```
+To this:
+```csharp
+Localize.AnyBar_Plugin_Localization_Demo_Value_With_Keys(firstName, lastName);
+```
+
+If you would like to add summary for functions of localization strings, you need to comment strings in xaml files like this:
+```xml
+<!--
+<summary>Demo plugin name</summary>
+-->
+<system:String x:Key="AnyBar_Plugin_Localization_Demo_Plugin_Name">Demo</system:String>
+```
+
+Or if you would like to change the default types or names of variables in localization strings, you need to comment strings in xaml file like this:
+```xml
+<!--
+<param index="0" name="value0" type="object" />
+<param index="1" name="value1" type="string" />
+<param index="2" name="value2" type="int" />
+-->
+<system:String x:Key="AnyBar_Plugin_Localization_Demo_Value_With_Keys">Demo {2:00}, {1,-35:D} and {0}</system:String>
+```
+
+### Localized Enums
+
+For enum types (e.g., `DemoEnum`) that need localization in UI controls such as combo boxes, use the `EnumLocalize` attribute to enable localization. For each enum field:
+- Use `EnumLocalizeKey` to provide a custom localization key.
+- Use `EnumLocalizeValue` to provide a constant localization string.
+
+Example:
+
+```csharp
+[EnumLocalize] // Enable localization support
+public enum DemoEnum
+{
+    // Specific localization key
+    [EnumLocalizeKey("localize_key_1")]
+    Value1,
+
+    // Specific localization value
+    [EnumLocalizeValue("This is my enum value localization")]
+    Value2,
+
+    // Key takes precedence if both are present
+    [EnumLocalizeKey("localize_key_3")]
+    [EnumLocalizeValue("Localization Value")]
+    Value3,
+
+    // Using the Localize class. This way, you can't misspell localization keys, and if you rename
+    // them in your .xaml file, you won't forget to rename them here as well because the build will fail.
+    [EnumLocalizeKey(nameof(Localize.Anybar_Plugin_Localization_Demo_Plugin_Description))]
+    Value4,
+}
+```
+
+Then, use the generated `DemoEnumLocalized` class within your view model to bind to a combo box control:
+
+```csharp
+// ComboBox ItemSource
+public List<DemoEnumLocalized> AllDemoEnums { get; } = DemoEnumLocalized.GetValues();
+
+// ComboBox SelectedValue
+public DemoEnum SelectedDemoEnum { get; set; }
+```
+
+In your XAML, bind as follows:
+
+```xml
+<ComboBox
+    DisplayMemberPath="Display"
+    ItemsSource="{Binding AllDemoEnums}"
+    SelectedValue="{Binding SelectedDemoEnum}"
+    SelectedValuePath="Value" />
+```
+
+To update localization strings when the language changes, you can call:
+
+```csharp
+DemoEnumLocalize.UpdateLabels(AllDemoEnums);
+```

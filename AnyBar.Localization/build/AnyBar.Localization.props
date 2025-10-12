@@ -1,0 +1,6 @@
+﻿<Project>
+    <ItemGroup>
+        <CompilerVisibleProperty Include="AnyBarUseDependencyInjection" />
+        <AdditionalFiles Include="Languages\en.xaml" />
+    </ItemGroup>
+</Project>
