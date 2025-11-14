@@ -4,6 +4,7 @@
     <File Path=".github/FUNDING.yml" />
     <File Path=".github/workflows/build.yml" />
     <File Path=".github/workflows/publish.yml" />
+    <File Path=".github/workflows/remove-old-artifacts.yml" />
     <File Path="global.json" />
     <File Path="LICENSE" />
     <File Path="README.md" />

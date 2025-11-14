@@ -59,4 +59,5 @@ jobs:
         uses: actions/upload-artifact@v5
         with:
           name: AnyBar.Localization
+          retention-days: 7
           path: AnyBar.Localization/bin/Release
