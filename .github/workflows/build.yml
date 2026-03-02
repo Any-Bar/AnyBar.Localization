@@ -56,7 +56,7 @@ jobs:
 
       # Upload the NuGet package
       - name: Upload NuGet package
-        uses: actions/upload-artifact@v6
+        uses: actions/upload-artifact@v7
         with:
           name: AnyBar.Localization
           retention-days: 7
